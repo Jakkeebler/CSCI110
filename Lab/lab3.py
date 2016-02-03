@@ -37,7 +37,7 @@ def meetAndGreet():
     print()
 
 # Function to print converted time
-def printTime(seconds, seconds2, minutes, hours, days, weeks):
+def printTime(seconds, seconds2, minutes, hours, days, weeks, months, years):
     print("You entered %d seconds."%(seconds))
     if seconds < 60:
         print("Your time is: %d seconds."%(seconds2))
@@ -47,8 +47,13 @@ def printTime(seconds, seconds2, minutes, hours, days, weeks):
         print("Your time is: %d hours, %d minutes, and %d seconds."%(hours, minutes, seconds2))
     elif days >= 1 and weeks < 1:
         print("Your time is: %d days, %d hours, %d minutes, and %d seconds."%(days, hours, minutes, seconds2))
-    elif weeks >= 1:
+    elif weeks >= 1 and months < 1:
         print("Your time is: %d weeks, %d days, %d hours, %d minutes, and %d seconds."%(weeks, days, hours, minutes, seconds2))
+    elif months >= 1 and years < 1:
+        print("Your time is: %d months, %d weeks, %d days, %d hours, %d minutes, and %d seconds."%(months, weeks, days, hours, minutes, seconds2))
+    elif years >= 1:
+        print("Your time is: %d years, %d months, %d weeks, %d days, %d hours, %d minutes, and %d seconds."%(years, months, weeks, days, hours, minutes, seconds2))
+
 
 #FIXME
 # Define a function named convertTime that takes 1 integer argument called seconds.
@@ -56,12 +61,17 @@ def printTime(seconds, seconds2, minutes, hours, days, weeks):
 def convertTime():
     seconds = int(input("Please enter a time in seconds:\n"))
 
+    # Declare variables for different time formats.
     minutes = 0
     hours = 0
     days = 0
     weeks = 0
+    months = 0
+    years = 0
     seconds2 = 0
 
+    # If statements to convert the time to Years, Months, Weeks, Days, Hours, Minutes, and Remaining Seconds
+    # Calling int() to round all values to whole integers
     if seconds >= 60:
         minutes = int((seconds / 60))
         seconds2 = int((seconds % 60))
@@ -78,12 +88,20 @@ def convertTime():
                     weeks = int(days / 7)
                     days = int((days - (7 * weeks)))
 
-    printTime(seconds, seconds2, minutes, hours, days, weeks)
+                    if weeks >= 4:
+                        months = int(weeks / 4)
+                        weeks = int((weeks - (4 * months)))
+
+                        if months >= 12:
+                            years = int(months / 12)
+                            months = int((months - (12 * years)))
+
+    printTime(seconds, seconds2, minutes, hours, days, weeks, months, years)
 
 # Call printHello function
 printHello()
 
-#FIXME - Call printHelloTwice function
+# FIXME - Call printHelloTwice function
 printHelloTwice()
 
 someName = "Bill Gates"
@@ -92,10 +110,10 @@ greetName(someName)
 # Calling function passing literal valus as argument.
 greetName("Larry Page")
 
-#Call meetAndGreet
+# Call meetAndGreet
 meetAndGreet()
 
-#FIXME - Call function convertTime passing proper arguments
+# FIXME - Call function convertTime passing proper arguments
 while True:
     convertTime()
 
